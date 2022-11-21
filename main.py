@@ -24,30 +24,43 @@ ligne = [
 #w, h = [int(i) for i in input().split()]
 h = 7
 w = 3
-debutColonne = 0
+nomColonne = []
+resultColonne = []
+
 positionColonne=0
 for i in range(h):
     for line in ligne[i]:
-        print(line)
+        #print(line)
         if i == 0:
+            debutColonne = 0
             for j in range(w):
-                print(" colonnes "+line[j+debutColonne]+" "+str(j))
+                nomColonne.append(line[j+debutColonne])
+                debutColonne += 2
+            break
+        if i == h:
+            debutColonne = 0
+            for j in range(w):
+                resultColonne.append(line[j+debutColonne])
                 debutColonne += 2
             break
         if positionColonne < h:
-            positionColonne +=1
-            if line[positionColonne] == '  ':
-                positionColonne -=1
+            if line[positionColonne+1] == '  ':
                 break
-            if line[positionColonne] == '-':
-                positionColonne += 2
+            if line[positionColonne+1] == '-':
+                positionColonne += 3
+                print(line)
+                print(line[positionColonne])
                 break
-            if line[positionColonne-2] == '-':
-                positionColonne -= 3
-                break
+            if positionColonne > 0:
+                if line[positionColonne-1] == '-':
+                    positionColonne -= 3
+                    print(line[positionColonne])
+                    break
 
-
-    print("position",str(positionColonne)," ")
+    print(nomColonne)
+    print(resultColonne)
+    print(positionColonne)
+    #print("position",nomColonne[positionColonne-1]+resultColonne[positionColonne-1])
     
 # Write an answer using print
 # To debug: print("Debug messages...", file=sys.stderr, flush=True)
